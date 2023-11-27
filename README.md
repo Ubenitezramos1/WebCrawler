@@ -33,8 +33,8 @@ Before you can start using Git, you need to configure it. Run each of the follow
 
 ### Cloning this repository
 <ol>
-<li> Use the command line (or Git bash) to go into the folder you'd like the repository cloned in. For example, say I have a folder called "Software Engineering", so the command I would use is this for the command line: <code>cd "C:School Stuff\Software Engineering"</code> and this in Git Bash: <code>cd /c/School\ Stuff/Software\ Engineering/</code></li>
-<li> Use this command on the command line when you've entered the desired folder: <code>git clone https://github.com/envyimran/i-schedule.git</code></li>
+<li> Use the command line (or Git bash) to go into the folder you'd like the repository cloned in. For example, say I have a folder called "Operating Systems", so the command I would use is this for the command line: <code>cd "C:School Stuff\Operating Systems"</code> and this in Git Bash: <code>cd /c/School\ Stuff/Operating\ Systems/</code></li>
+<li> Use this command on the command line when you've entered the desired folder: <code>git clone https://github.com/Ubenitezramos1/WebCrawler.git</code></li>
 <li> You can ensure the repository's been cloned if you're using Git bash by CD'ing into the folder, where you'll see "(master") next to the folder name in the terminal </li>
 </ol>
 
