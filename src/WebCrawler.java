@@ -1,5 +1,3 @@
-package WebCrawler;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,10 +7,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.Scanner; 
 
 public class WebCrawler {
 
@@ -71,19 +71,23 @@ public class WebCrawler {
     }
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Usage: java MultiThreadedWebCrawler <initialUrl>");
-            System.exit(1);
-        }
+        try (Scanner scan = new Scanner(System.in)) {
+            /*if (args.length != 1) {
+                Syswiki.tem.out.println("Usage: java MultiThreadedWebCrawler <initialUrl>");
+                System.exit(1);
+            }*/
 
-        String initialUrl = args[0];
+            System.out.println("Enter a Url to start crawling: ");
+            String initialUrl = scan.nextLine();
+            initialUrl = initialUrl.replaceAll("\\s+","");
 
-        WebCrawler webCrawler = new WebCrawler();
-        Set<String> allUrls = webCrawler.getLinks(initialUrl);
+            WebCrawler webCrawler = new WebCrawler();
+            Set<String> allUrls = webCrawler.getLinks(initialUrl);
 
-        System.out.println("All URLs found:");
-        for (String url : allUrls) {
-            System.out.println(url);
+            System.out.println("All URLs found:");
+            for (String url : allUrls) {
+                System.out.println(url);
+            }
         }
     }
 
