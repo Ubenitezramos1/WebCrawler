@@ -1,4 +1,4 @@
-# WebCrawler
+WebCrawler
 WebCrawler project for Operating Systems 
 
 # Environment Setup
