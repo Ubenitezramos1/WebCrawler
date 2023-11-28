@@ -72,10 +72,6 @@ public class WebCrawler {
 
     public static void main(String[] args) {
         try (Scanner scan = new Scanner(System.in)) {
-            /*if (args.length != 1) {
-                Syswiki.tem.out.println("Usage: java MultiThreadedWebCrawler <initialUrl>");
-                System.exit(1);
-            }*/
 
             System.out.println("Enter a Url to start crawling: ");
             String initialUrl = scan.nextLine();
