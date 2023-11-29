@@ -125,12 +125,6 @@ private void awaitTermination() {
     }
 }
 
-// Add this method to your WebCrawler class
-private void shutdownExecutorService() {
-    // Shut down the executor service to terminate threads after the tasks are completed
-    executorService.shutdown();
-}
-
 	
 }
 
