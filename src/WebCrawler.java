@@ -19,7 +19,7 @@ public class WebCrawler {
 
     //Set to store visited URLs
     private Set<String> visitedUrls = new HashSet<>();
-     // Create a thread pool with the number of threads equal to the available processors
+     // Create a thread pool with the number of threads equal to the available processors specific to your machine
     private ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 
