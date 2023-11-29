@@ -1,5 +1,5 @@
 Cyber Boolies - OS WebCrawler Project
-Members:Uly Adams, Uriel Benitez, Leah Cheong, Caleb Cordier, Crishelle Culmer
+Members: Uly Adams, Uriel Benitez, Leah Cheong, Caleb Cordier, Crishelle Culmer
 
 Our project is a multi-threaded web crawler is an advanced script that utilizes multiple threads to concurrently 
 fetch and process web pages, significantly improving efficiency and speed.
@@ -10,8 +10,8 @@ Output: The program scrapes through each URL (if they haven't been visited befor
 
 How to Run the crawler: VsCode is recommended
     - Download the zip file if you haven't already
-    - Add the Folder to a new java project in VsCode
+    - Add the Web Crawler Folder to a new Java project in VsCode
     - To run the WebCrawler.java file, you need the appropriate libraries
     - Under Java Projects, click on referenced libraries and add the jsoup-1.16.2.jar file 
     - Run the WebCrawler.java code and enter your preferred URL in the correct format in the terminal (Ex: https://en.wikipedia.org/)
-    - To stop the code in terminal, press Ctrl+C (works with Mac and Windows)
+    - To stop the code in the terminal, press Ctrl+C (works with Mac and Windows)
