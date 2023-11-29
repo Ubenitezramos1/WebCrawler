@@ -1,4 +1,5 @@
 //Import necessary libraries
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,6 +19,8 @@ public class WebCrawler {
 
     //Set to store visited URLs
     private Set<String> visitedUrls = new HashSet<>();
+    private ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
 
     //Method to start crawling from a given URL and return all found links
     public Set<String> getLinks(String initialUrl) {
@@ -54,6 +57,10 @@ public class WebCrawler {
             }
             //Mark the current URL as visited
             visitedUrls.add(url);
+        } catch (HttpStatusException httpStatusException) {
+            // Handle HTTP status exceptions (e.g., 403 Forbidden)
+            System.err.println("HTTP error crawling: " + url + ". Status=" + httpStatusException.getStatusCode());
+            // You can choose to log the error or take other appropriate actions
         } catch (IOException e) {
             //Handle IO exceptions while crawling
             System.err.println("Error crawling: " + url);
@@ -77,42 +84,53 @@ public class WebCrawler {
 
     //Method to submit a URL for crawling in a seperate thread
     private void submitTaskForCrawling(String url, Set<String> links) {
-        //Create a thread pool with the number of threads equal to the available processors
-        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         //Submit a task to crawl the URL in a seperate thread
         executorService.submit(() -> crawl(url, links));
-        //Shutdown the executor service to terminate threads after the tasks are completed
-        executorService.shutdown();
     }
 
     //Main method to start the web crawler
-    public static void main(String[] args) {
-        //Use a try-with-resources statement to automatically close the scanner
-        try (Scanner scan = new Scanner(System.in)) {
+   public static void main(String[] args) {
+    //Use a try-with-resources statement to automatically close the scanner
+    try (Scanner scan = new Scanner(System.in)) {
+        //Prompt the user to enter the initial URL to start crawling
+        System.out.println("Enter a Url to start crawling: ");
+        //Read the user input
+        String initialUrl = scan.nextLine();
+        //Remove whitespaces from the input URL
+        initialUrl = initialUrl.replaceAll("\\s+", "");
 
-            //Prompt the user to enter the initial URL to start crawling
-            System.out.println("Enter a Url to start crawling: ");
-            //Read the user input
-            String initialUrl = scan.nextLine();
-            //Remove whitespaces from the input URL
-            initialUrl = initialUrl.replaceAll("\\s+","");
+        //Create a WebCrawler instance
+        WebCrawler webCrawler = new WebCrawler();
+        //Get all URls by crawling the initial  URL
+        Set<String> allUrls =  new HashSet<>(webCrawler.getLinks(initialUrl));
 
-            //Create a WebCrawler instance
-            WebCrawler webCrawler = new WebCrawler();
-            //Get all URLs by crawling the initial URL
-            Set<String> allUrls = webCrawler.getLinks(initialUrl);
+        // Shutdown the executor service after all tasks are completed
+        webCrawler.awaitTermination();
 
-            //Print all found URLs
-            System.out.println("All URLs found:");
-            for (String url : allUrls) {
-                System.out.println(url);
-            }
+        //Print all found URLs
+        System.out.println("All URLs found:");
+        for (String url : allUrls) {
+            System.out.println(url);
         }
     }
+}
 
-	public Set<String> startCrawling(String initialUrl) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+ // Method to wait for all tasks to complete before shutting down the executor service
+private void awaitTermination() {
+    try {
+        executorService.shutdown();
+        executorService.awaitTermination(Long.MAX_VALUE, java.util.concurrent.TimeUnit.NANOSECONDS);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+
+// Add this method to your WebCrawler class
+private void shutdownExecutorService() {
+    // Shut down the executor service to terminate threads after the tasks are completed
+    executorService.shutdown();
+}
+
+	
 }
 
